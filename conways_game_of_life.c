@@ -188,7 +188,7 @@ int main(int argc, char** argv)
         }
         if ( keys.upButtonDown )
         {
-            if ( ticks_per_lifecycle > 100 )
+            if ( ticks_per_lifecycle > 0 )
             {
                 ticks_per_lifecycle -= 100;
             }
