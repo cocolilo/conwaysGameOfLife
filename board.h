@@ -61,12 +61,12 @@ int update_board( board* b );
 /**
 * Return the state of the cell at location x, y in the given board
 */
-bool cell_state( int x, int y, board* b );
+static inline bool cell_state( int x, int y, board* b );
 
 /**
 * Return the updated state of the cell at location x, y in the given board
 */
-bool updated_cell_state( int x, int y, board* b );
+static inline bool updated_cell_state( int x, int y, board* b );
 
 /**
 * Invert the state of the given cell ( alive -> dead and dead -> alive )

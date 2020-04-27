@@ -62,7 +62,7 @@ int main(int argc, char** argv)
 
     // Create a window
     SDL_WindowFlags flags =
-        SDL_WINDOW_SHOWN | SDL_WINDOW_MOUSE_FOCUS | SDL_WINDOW_ALLOW_HIGHDPI | SDL_WINDOW_FULLSCREEN;
+        SDL_WINDOW_SHOWN | SDL_WINDOW_MOUSE_FOCUS | SDL_WINDOW_ALLOW_HIGHDPI | SDL_WINDOW_FULLSCREEN_DESKTOP;
     SDL_Window* window = SDL_CreateWindow(
         "Conway's game of life",
         SDL_WINDOWPOS_CENTERED,

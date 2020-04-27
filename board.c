@@ -5,7 +5,7 @@
 #define ZOOM_OUT(n) (n < 0)
 #define ZOOM_IN(n) (n > 0)
 
-inline bool change_cell_state( int x, int y, bool state, board *b );
+static inline bool change_cell_state( int x, int y, bool state, board *b );
 
 /* Returns min or max if num is less then or greater than either of them. */
 int clamp( int min, int max, int num)
@@ -58,7 +58,7 @@ int random_uniform( int n )
 }
 
 
-inline int board_byte_size( int rows, int columns )
+static inline int board_byte_size( int rows, int columns )
 {
     int size = sizeof( board ) + ( rows * columns ) / 8;
     // Add 1 if the number of cells is not divisible by 8 (8 bits = 1 bytes)
@@ -115,18 +115,18 @@ int update_board( board* b )
     return living_cells_count;
 }
 
-inline bool pos_in_board( int x, int y, board *b )
+static inline bool pos_in_board( int x, int y, board *b )
 {
     return x >= 0 && y >= 0 && x < b->columns && y < b->rows;
 }
 
 /* Return the bitmask for the cell at location (x, y). */
-inline int cell_bitmask( int x, int y, board *b )
+static inline int cell_bitmask( int x, int y, board *b )
 {
     return ( int ) powf( 2, ( y*b->columns + x ) % 8 );
 }
 
-inline bool cell_state( int x, int y, board* b )
+static inline bool cell_state( int x, int y, board* b )
 {
     if ( !pos_in_board( x, y, b ) )
     {
@@ -137,7 +137,7 @@ inline bool cell_state( int x, int y, board* b )
     return ( cell_states & bitmask ) != 0;
 }
 
-inline int living_neighbors( int x, int y, board *b )
+static inline int living_neighbors( int x, int y, board *b )
 {
     return cell_state( x - 1, y - 1, b ) +
            cell_state( x    , y - 1, b ) +
@@ -154,7 +154,7 @@ void toggle_cell_state( int x, int y, board *b )
     change_cell_state( x, y, !cell_state( x, y, b ), b );
 }
 
-inline bool updated_cell_state( int x, int y, board* b )
+static inline bool updated_cell_state( int x, int y, board* b )
 {
     // Count the living neighbors
     int living_neighbor_cells =  living_neighbors( x, y, b );
@@ -164,7 +164,7 @@ inline bool updated_cell_state( int x, int y, board* b )
 }
 
 
-inline bool change_cell_state( int x, int y, bool state, board *b )
+static inline bool change_cell_state( int x, int y, bool state, board *b )
 {
     if ( !pos_in_board( x, y, b ) )
     {
@@ -214,21 +214,21 @@ void kill_all_cells( board * b )
     memset( ( char* ) b + sizeof( board ), 0, board_byte_size( b->rows, b->columns ) - sizeof( board ) );
 }
 
-inline bool camera_in_bounds( view *v, board* b )
+static inline bool camera_in_bounds( view *v, board* b )
 {
     bool x_in_boundaries = v->camera_x >= 0 && ( v->camera_x <= b->columns - v->width_in_cells );
     bool y_in_boundaries = v->camera_y >= 0 && ( v->camera_y <= b->rows - v->height_in_cells );
     return x_in_boundaries && y_in_boundaries;
 }
 
-inline void get_view_center( view *v, int *x, int *y )
+static inline void get_view_center( view *v, int *x, int *y )
 {
     *x = v->camera_x + v->width_in_cells / 2;
     *y = v->camera_y + v->height_in_cells / 2;
 }
 
 /* Sets the pos of the view so that the view's center is at the given position */
-inline void set_view_pos_to_center( int x, int y, view *v )
+static inline void set_view_pos_to_center( int x, int y, view *v )
 {
     v->camera_x = x - ( v->width_in_cells / 2 );
     v->camera_y = y - ( v->height_in_cells / 2 );
