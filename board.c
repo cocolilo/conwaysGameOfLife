@@ -25,7 +25,7 @@ void clamp_view_pos( view *v, board *b )
     v->camera_y = clamp( 0, max_camera_y, v->camera_y );
 }
 
-int random( )
+int redefinedRandom( )
 {
     static bool initialized;
     if ( !initialized )
@@ -51,7 +51,7 @@ int random_uniform( int n )
     int rand_val;
     do
     {
-        rand_val = random( );
+        rand_val = redefinedRandom( );
     }
     while ( rand_val >= INT_MAX - ( INT_MAX % n ) );
     return rand_val % n ;

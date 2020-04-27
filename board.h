@@ -9,8 +9,9 @@
 #include <math.h>
 #include <assert.h>
 #include <stdlib.h>
+#include <limits.h>
 
-#include "SDL.h"
+#include <SDL2/SDL.h>
 
 #define FALSE 0
 #define TRUE 1
