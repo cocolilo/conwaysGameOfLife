@@ -17,11 +17,9 @@
 *   Scroll wheel - Zoom
 *
 * TODO:
-*     - Store the board as an array of 32 or 64 bit integers depending on the system's architecture
 *     - Measure and improve the performance (There probably is a way to optimize the update_board function)
 *     - Add support for the Run Length Encoded (RNE) file format
 *     - Add a Makefile
-*     - Test on linux
 *     - Extract complicated boolean conditions in board.c into functions
 *     - Remove everything regarding the RNE file format (YAGN - You ain't gonna need it)
 *     - Don't access the board manually in init_board
