@@ -1,6 +1,6 @@
 #include "board.h"
 
-#define MIN_CELL_SIZE 2 
+#define MIN_CELL_SIZE 1
 #define MAX_CELL_SIZE 30
 #define ZOOM_OUT(n) (n < 0)
 #define ZOOM_IN(n) (n > 0)

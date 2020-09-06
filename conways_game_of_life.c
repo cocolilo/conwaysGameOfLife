@@ -87,7 +87,7 @@ int main(int argc, char** argv)
     view player_view;
     int window_height, window_width;
     SDL_GL_GetDrawableSize( window, &window_width, &window_height );
-    player_view.cell_size = 10;
+    player_view.cell_size = 1;
     player_view.height_in_cells = window_height / player_view.cell_size;
     player_view.width_in_cells = window_width / player_view.cell_size;
     player_view.window_height = window_height;
@@ -111,6 +111,7 @@ int main(int argc, char** argv)
 
     // Draw the first state of the board
     draw_board( cell_board, &player_view, renderer );
+    resize_board_view( 4, &player_view, cell_board );
 
     buttons keys = { FALSE };
     mouseState mouse = { FALSE, (Uint16)-1, (Uint16)-1 };
@@ -152,7 +153,7 @@ int main(int argc, char** argv)
             else if ( e.wheel.y == 1 || e.wheel.y == -1)
             {
                 // Zoom
-                resize_board_view( -e.wheel.y, &player_view, cell_board );
+                resize_board_view( e.wheel.y, &player_view, cell_board );
             }
         }
 
