@@ -98,9 +98,9 @@ int update_board( board* b )
     temp_board->columns = b->columns;
 
     int living_cells_count = 0;
-    for ( int y = 0; y < b->rows; y++ )
+    for ( register int y = 0; y < b->rows; y++ )
     {
-        for ( int x = 0; x < b->columns; x++ )
+        for ( register int x = 0; x < b->columns; x++ )
         {
             if ( change_cell_state( x, y, updated_cell_state( x, y, b ), temp_board ) )
             {
@@ -189,9 +189,9 @@ void draw_board( board* b, view *player_view, SDL_Renderer* renderer )
     // Iterate over all cells in the view and draw them to the renderer
     int screenHeight, screenWidth;
     SDL_GetRendererOutputSize( renderer, &screenWidth, &screenHeight );
-    for ( int row = 0; row < player_view->height_in_cells; row++ )
+    for ( register int row = 0; row < player_view->height_in_cells; row++ )
     {
-        for ( int column = 0; column < player_view->width_in_cells; column++ )
+        for ( register int column = 0; column < player_view->width_in_cells; column++ )
         {
             current_cell_alive = cell_state( column + player_view->camera_x, row + player_view->camera_y, b );
 

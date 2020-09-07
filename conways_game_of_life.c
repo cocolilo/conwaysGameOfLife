@@ -60,7 +60,7 @@ int main(int argc, char** argv)
 
     // Create a window
     SDL_WindowFlags flags =
-        SDL_WINDOW_SHOWN | SDL_WINDOW_MOUSE_FOCUS | SDL_WINDOW_ALLOW_HIGHDPI | SDL_WINDOW_FULLSCREEN_DESKTOP;
+        SDL_WINDOW_SHOWN | SDL_WINDOW_MOUSE_FOCUS | SDL_WINDOW_FULLSCREEN_DESKTOP;
     SDL_Window* window = SDL_CreateWindow(
         "Conway's game of life",
         SDL_WINDOWPOS_CENTERED,
@@ -104,7 +104,7 @@ int main(int argc, char** argv)
     int living_cells = 0;
     SDL_Event e;
     Uint32 last_update_time = 0;
-    Uint32 ticks_per_lifecycle = 1000;
+    Uint32 ticks_per_lifecycle = 10;
 
     uint8_t quit = FALSE;
     uint8_t paused = FALSE;
@@ -188,8 +188,12 @@ int main(int argc, char** argv)
         if ( keys.upButtonDown )
         {
             if ( ticks_per_lifecycle > 0 )
-            {
-                ticks_per_lifecycle -= 100;
+            {   
+                if(ticks_per_lifecycle-100 <= 0) {
+                    ticks_per_lifecycle = 10;
+                } else {
+                    ticks_per_lifecycle -= 100;
+                }
             }
         }
         if ( keys.downButtonDown )
@@ -219,15 +223,12 @@ int main(int argc, char** argv)
         {
             living_cells = update_board( cell_board );
             last_update_time = SDL_GetTicks( );
+
+            // Clear the entire screen and redraw it
+            draw_board( cell_board, &player_view, renderer );
         }
 
-        // Clear the entire screen and redraw it
-        SDL_SetRenderDrawColor( renderer, 0, 0, 0, 255 );
-        if ( SDL_RenderClear( renderer ) )
-        {
-            fprintf( stderr, "%s\n", SDL_GetError( ) );
-        }
-        draw_board( cell_board, &player_view, renderer );
+    SDL_Delay(40);
     }
 
     // Clean up and exit
